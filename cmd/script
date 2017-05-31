@@ -7,9 +7,9 @@ echo "Enter a number: "
 read value1
 echo "Enter another number: "
 read value2
-checkIfDec=`echo $value1 | grep -Eq '^[-+]?[0-9]+\.?[0-9]*$' && echo 1`
+checkIfDec=`(echo $value1 | grep -Eq '^[-+]?[0-9]+[0-9]*$' && echo 1) || echo 0`
 case $option in
-1) if [ $checkIfDec -eq 1 ]; then
+1) if [ $checkIfDec -ne 1 ]; then
 	./encF $value1 sec.key a.ct
 	./encF $value2 sec.key b.ct
 	./addF ev.key a.ct b.ct c.ct
@@ -18,7 +18,7 @@ case $option in
 	./enc $value2 sec.key b.ct
 	./add ev.key a.ct b.ct c.ct
    fi;;
-2) if [ $checkIfDec -eq 1 ]; then 
+2) if [ $checkIfDec -ne 1 ]; then 
 	./encF $value1 sec.key a.ct
 	./encF $value2 sec.key b.ct
 	./addF ev.key a.ct b.ct c.ct
@@ -34,7 +34,7 @@ esac
 value3=`echo "obase=2;$value1+$value2" | bc`
 value3=`expr length $value3`
 echo "length: $value3"
-if [ $checkIfDec -eq 1 ]; then
+if [ $checkIfDec -ne 1 ]; then
 	./decF sec.key c.ct
 else 
 	if [ $option -eq 1 ]
