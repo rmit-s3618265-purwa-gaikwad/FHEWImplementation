@@ -66,6 +66,7 @@ int main(int argc, char *argv[]) {
   }
   int binaryNum;
   binaryStr >> binaryNum;
+  cout << "Value in binary : ---------- " << binaryNum << endl;
        while (binaryNum > 0)
      {
          rem = binaryNum % 10;

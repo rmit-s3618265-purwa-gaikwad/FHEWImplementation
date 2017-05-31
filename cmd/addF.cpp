@@ -77,4 +77,5 @@ LWE::SecretKey* SK = LoadSecretKey("sec.key");
   {
   	SaveCipherText(temp[i], oct_fn);
   }
+	cout << endl;
 }

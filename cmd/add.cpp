@@ -33,15 +33,25 @@ int main(int argc, char *argv[]) {
   LWE::CipherText *ct3,*ct4, *ct5, *ct6, *ct7, *ctIn, *ct8, *ct9, *ct10, *ct11, *ctOut;
   LoadCipherText(ict1_fn, arraySize, true);
   LWE::CipherText **ct1 = new LWE::CipherText*[arraySize];
-  for(int i=0;i<arraySize;i++)
+  if(arraySize == 1)
+	ct1[0] = LoadCipherText(ict1_fn, arraySize, true);
+  else
   {
- 	 ct1[i] = get(i, true);
+	for(int i=0;i<arraySize;i++)
+  	{
+ 		 ct1[i] = get(i, true);
+  	}
   }
   LoadCipherText(ict2_fn, arraySize, false);
   LWE::CipherText **ct2 = new LWE::CipherText*[arraySize];
-  for(int i=0;i<arraySize;i++)
-  {     
-         ct2[i] = get(i, false);
+  if(arraySize == 1)
+	ct2[0] = LoadCipherText(ict2_fn, arraySize, true);
+  else
+  {
+  	for(int i=0;i<arraySize;i++)
+  	{     
+        	 ct2[i] = get(i, false);
+  	}
   }
   ct3 = new LWE::CipherText;
   ct4 = new LWE::CipherText;

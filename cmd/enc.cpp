@@ -47,8 +47,7 @@ int main(int argc, char *argv[]) {
 		  cerr << " The message must be 0 or 1.\n";
 	  exit(0);
 	  }
-
-
+	cout << "bincary : " << binaryArray[j] << endl;
 	LWE::Encrypt(&ct[j], *SK, binaryArray[j]); 	
 	SaveCipherText(&ct[j],ct_fn);
   }

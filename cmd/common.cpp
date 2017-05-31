@@ -88,14 +88,14 @@ LWE::CipherText* LoadCipherText(char* filepath, int arr_size, bool arrType) {
 	if(arr_size == 1)
 	{
 		LWE::CipherText *ct1 = new LWE::CipherText;
-  		cerr << "Loading CipherText from "<< filepath <<  ".\n";
+	//	cerr << "Loading CipherText from "<< filepath <<  ".\n";
 		assert(fread(ct1, sizeof(LWE::CipherText), 1, f));
 		fclose(f);
 		return ct1;
 	}
 	else
 	{
-  		cerr << "Loading CipherText from "<< filepath <<  ".\n";
+  	//	cerr << "Loading CipherText from "<< filepath <<  ".\n";
 		if(arrType)
 		{
 			assert(fread(ct2, sizeof(LWE::CipherText), arr_size, f));
@@ -127,7 +127,7 @@ void setValueToFile(int size, char* filepath)
 	    cerr << "Failed to open  file in Write  mode"<< filepath << " .\n";
   	    exit(1);
  	 }
-  	cerr << "Writing values to file"<<filepath<< ".\n";
+  	//cerr << "Writing values to file"<<filepath<< ".\n";
   	//assert(fwrite(size, sizeof(size), 1, f));
 	assert(fprintf(f, "%d",size));
 }
@@ -141,7 +141,7 @@ int getValueFromFile(char* filepath)
             cerr << "Failed to open  file in Read  mode"<<filepath << ".\n";
             exit(1);
          }
-        cerr << "Reading values from file"<<filepath<< ".\n";
+        //cerr << "Reading values from file"<<filepath<< ".\n";
         //return assert(fread(size, sizeof(size), 1, f));
 	fscanf(f, "%d",&size);
 	return size;

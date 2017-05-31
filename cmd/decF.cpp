@@ -31,7 +31,9 @@ double afterDecimal;
 	temp = get(i, true);
 	ctAns[i] = new LWE::CipherText;
         ctAns[i] = temp;
+	cout << LWE::Decrypt(*SK,*ctAns[i]);
   }
+  cout << endl;
 // getting expo
   for(int i=1; i < 9;i++)
   {
@@ -57,12 +59,11 @@ double afterDecimal;
 	}
 	int decimalNum;
 	binaryStr2 >> decimalNum;
- 	
 dec = 0; 
 base = 1;
 	 while (decimalNum > 0)
          {
-		rem = binaryNum % 10;
+		rem = decimalNum % 10;
          	dec = dec + rem * base;
          	base = base * 2;
          	decimalNum = decimalNum / 10;
