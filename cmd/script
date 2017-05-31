@@ -1,0 +1,45 @@
+#!/bin/sh 
+#!/bin/bash
+rm *.ct
+echo "Choose an option: \n1.Addition \n2.Subtraction \n3.Multiplication"
+read option
+echo "Enter a number: "
+read value1
+echo "Enter another number: "
+read value2
+checkIfDec=`echo $value1 | grep -Eq '^[-+]?[0-9]+\.?[0-9]*$' && echo 1`
+echo "trying number is 0 or 1 :$checkIfDec"
+./enc 0 sec.key d.ct
+./enc $value1 sec.key a.ct
+./enc $value2 sec.key b.ct
+case $option in
+1) if [ $checkIfDec -eq 1 ] then
+	./addF ev.key a.ct b.ct c.ct
+	else
+	./add ev.key a.ct b.ct c.ct
+   fi;;
+2) if [ $checkIfDec -eq 1 ] then 
+	./subF ev.key a.ct b.ct c.ct
+	else
+	./sub ev.key a.ct b.ct c.ct
+   fi;;
+	
+3) ./multi ev.key a.ct b.ct c.ct;;
+esac
+value3=`echo "obase=2;$value1+$value2" | bc`
+value3=`expr length $value3`
+echo "length: $value3"
+if [ $option -eq 1 ]
+then
+	./dec sec.key c.ct a
+elif [ $option -eq 2 ] 
+then
+	if [ $value1 -gt $value2 ]
+	then
+		./dec sec.key c.ct f
+	else
+		./dec sec.key c.ct t
+	fi
+else
+	./dec sec.key c.ct m
+fi  
